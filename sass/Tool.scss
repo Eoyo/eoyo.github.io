@@ -37,6 +37,13 @@
         @content;
     }
 }
+@mixin Box(){
+    border : 1px solid black;
+}
+@mixin RandomColor(){
+    background: #3db;
+}
+
 @mixin Center($per){
     width: $per;
     @if($per*0 != 0%){
