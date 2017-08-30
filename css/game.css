@@ -62,39 +62,39 @@ body {
 
 li:nth-child(1) .character,
 li:nth-child(1) .click-area {
-  animation-duration: 0.24685s; }
+  animation-duration: 1.37555s; }
 
 li:nth-child(2) .character,
 li:nth-child(2) .click-area {
-  animation-duration: 0.89335s; }
+  animation-duration: 0.6293s; }
 
 li:nth-child(3) .character,
 li:nth-child(3) .click-area {
-  animation-duration: 1.40888s; }
+  animation-duration: 0.90744s; }
 
 li:nth-child(4) .character,
 li:nth-child(4) .click-area {
-  animation-duration: 0.3884s; }
+  animation-duration: 0.35681s; }
 
 li:nth-child(5) .character,
 li:nth-child(5) .click-area {
-  animation-duration: 0.49227s; }
+  animation-duration: 0.6414s; }
 
 li:nth-child(6) .character,
 li:nth-child(6) .click-area {
-  animation-duration: 0.22875s; }
+  animation-duration: 0.01549s; }
 
 li:nth-child(7) .character,
 li:nth-child(7) .click-area {
-  animation-duration: 0.01915s; }
+  animation-duration: 1.44861s; }
 
 li:nth-child(8) .character,
 li:nth-child(8) .click-area {
-  animation-duration: 0.77455s; }
+  animation-duration: 1.32992s; }
 
 li:nth-child(9) .character,
 li:nth-child(9) .click-area {
-  animation-duration: 1.45292s; }
+  animation-duration: 0.6119s; }
 
 .stopper {
   width: 100vw;
@@ -257,7 +257,7 @@ h2 {
 
 @keyframes bang {
   to {
-    box-shadow: -35px -365.66667px #ff00d5, -143px -163.66667px #3300ff, -237px -302.66667px #8c00ff, -72px -161.66667px #00ff7b, 28px -330.66667px #00ffa2, -162px -398.66667px #00ff6a, 20px 58.33333px #ff3c00, 46px -172.66667px #00ffd5, 35px -362.66667px #0091ff, 58px 21.33333px #e100ff, 155px -410.66667px #00ffd5, 203px -306.66667px #1eff00, -201px -304.66667px #00ddff, 233px -39.66667px #ff0015, 123px -164.66667px #ff0004, -95px -1.66667px #ff0044, 74px -30.66667px #ff2200, -134px -85.66667px #002bff, -226px -260.66667px #00ff88, 120px -112.66667px #0015ff, 36px -244.66667px #8400ff, 101px -91.66667px #000dff, 174px -144.66667px #ddff00, 182px -165.66667px #ff7b00, -24px -189.66667px #2600ff, 43px -21.66667px #40ff00, 10px -374.66667px #11ff00, 162px -324.66667px #ff4d00, 77px 9.33333px #005eff, -214px -359.66667px #6f00ff, 189px -157.66667px #4d00ff, -246px -359.66667px #0077ff, 12px -375.66667px #00ff66, 135px -48.66667px #00bbff, 152px -406.66667px #fff700, 54px -263.66667px #002bff, -21px -383.66667px #ff0037, 100px -239.66667px #ff5e00, 176px -85.66667px #00ffa2, 209px -96.66667px #0066ff, -114px -132.66667px #ff9d00, -248px -357.66667px #004dff, -170px 21.33333px #00ff26, -160px 72.33333px #ff00ae, 126px 50.33333px #0dff00, 143px -184.66667px #ff1100, 191px -269.66667px #ff6f00, 114px -71.66667px #3cff00, -197px -186.66667px cyan, -244px -49.66667px magenta, 123px -78.66667px #ff4000; } }
+    box-shadow: -53px -379.66667px #44ff00, 58px -96.66667px #9dff00, 71px -162.66667px #00ff59, -241px -96.66667px #009dff, 17px -299.66667px #ff5900, 101px 11.33333px #ffc800, -6px 65.33333px #00ff0d, 120px -380.66667px #ff006a, 166px -190.66667px #ffc400, -90px -275.66667px #5900ff, 63px 27.33333px #ff0040, -245px -187.66667px #0077ff, -78px -254.66667px #ffa600, 65px -316.66667px #00ffe6, 143px -217.66667px #0026ff, 30px -2.66667px #ff8000, -145px -158.66667px #6a00ff, 224px -272.66667px #1a00ff, -92px -206.66667px #00d9ff, 155px -287.66667px #4400ff, -193px -82.66667px #002bff, -211px -187.66667px #ff0066, 133px -264.66667px #95ff00, 141px -369.66667px #6600ff, 231px -391.66667px #ff6600, -83px -52.66667px #8800ff, 111px -377.66667px #00eeff, -18px 47.33333px #ff003c, -15px -352.66667px #00ff3c, -174px -372.66667px #7bff00, 89px -326.66667px #ff00c4, -4px -137.66667px #4dff00, 192px 65.33333px #bf00ff, -211px -302.66667px #e100ff, 153px -326.66667px #a6ff00, -70px -59.66667px #0048ff, -46px -138.66667px #ffcc00, 67px -245.66667px #88ff00, -208px -192.66667px #00ff9d, 167px 1.33333px #00e1ff, 157px -180.66667px #ff4800, 128px -287.66667px #1eff00, 159px -225.66667px #00ff2f, 169px -230.66667px #00ff40, -212px -271.66667px #1aff00, 78px -261.66667px #ff004d, 124px -18.66667px #aa00ff, 189px -243.66667px #0037ff, -33px -389.66667px #0033ff, 179px 52.33333px #ff3c00, -6px -199.66667px deepskyblue; } }
 
 @keyframes gravity {
   to {

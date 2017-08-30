@@ -179,7 +179,13 @@ var js = {
         }
         return first;
     },
-    Set: class _Set {
+    tick(ele, str) {
+        // var event = document.createEvent("UIEvent");
+        // event.initUIEvent("input",true,true);
+        // event.target = ele;
+        // ele.dispatchEvent(event);
+    }
+    , Set: class _Set {
         constructor() {
             this.set = Object.create(null);
             var Set = Set || null;
@@ -1165,6 +1171,8 @@ var Hif = {
         return ele.tagName.toLowerCase();
     }
     , setValIndex: ""
+
+    //set value for one js obj
     , setOnepVal(ele, key, value, cb) {
         switch (true) {
             case value instanceof DataLeaf:
@@ -1208,6 +1216,8 @@ var Hif = {
                 ele[key] = value;
         }
     }
+
+    //for dom element
     , setVal(ele, key, value, cb) {
         switch (true) {
             case value instanceof DataLeaf:
@@ -1276,6 +1286,11 @@ var Hif = {
                         break;
                     case "class":
                         ele.className = value;
+                        break;
+                    case "value":
+                        ele.value = value;
+                        js.tick(ele, "input");
+                        break;
                     default:
                         ele[key] = value;
                 }
@@ -1283,8 +1298,12 @@ var Hif = {
     },
     setChildren(ele, array) {
         var len = array.length;
-        for (var i = 0; i < len; i++) {
-            ele.appendChild(array[i]);
+        try {
+            for (var i = 0; i < len; i++) {
+                ele.appendChild(array[i]);
+            }
+        } catch (e) {
+            console.error(e);
         }
     },
     initSelector() {
@@ -1847,10 +1866,10 @@ class Dom {
                                     parentRus[parentRus.length - 1].docs = [];
                                 }
 
-                                if(arrMode == "useRus"){
+                                if (arrMode == "useRus") {
                                     fEle = newEle;
                                     parentRus[parentRus.length - 1].docs.push(fEle);
-                                }else{
+                                } else {
                                     if (fEle.parentElement) {
                                         trueParentEle = fEle.parentElement
                                     } else {
@@ -1932,14 +1951,31 @@ class Dom {
     }
 }
 function Vir(ele, jsHiv) {
-    var dom;
+    var dom
+        , doEle =document.body
+
+    // ele is true
     if (jsHiv) {
         dom = new Dom(jsHiv);
-        var doEle = "";
-    } else {
+        switch (true) {
+            case typeof ele == "object":
+                doEle = ele;
+                break;
+            default:
+                try {
+                    doEle = document.querySelectorAll(ele)
+                }
+                catch (e) {
+                    console.error(e);
+                }
+                return;
+                break;
+        }
+    }
+    else {
         var dom = new Dom(ele);
     }
-    Hif.setChildren(document.body, dom.html);
+    Hif.setChildren(doEle, dom.html);
     return dom.args;
     //deal with for {}
 }
@@ -2040,7 +2076,7 @@ function For(from = {}, cb = () => { }, extend = {}) {
 }
 
 function ajax(op = {
-    type: "GET"
+    type: "GET" || "POST"
     , async: true
     , url: ""
     , success(data = "") { }
@@ -2048,6 +2084,10 @@ function ajax(op = {
 }) {
     var xhr = new XMLHttpRequest();
     var queryStr = "";
+    if (op.async == undefined) {
+        op.async = true;
+    }
+
     if (op.type == "GET") {
         if (op.data) {
             var head = '?';
@@ -2151,7 +2191,16 @@ window.onerror = function (mes) {
  * 2017 8 25
  *  null节点阻断解析;
  *  支持array 节点;
+ * 
+ * 
+ * 2017 8 29 
+ *  js.tick 手动触发事件;
+ *  set value 默认触发input
+ *  在某个dom处插入Vir片段;( Vir 可以多参数 )
+ *  iframe 默认解析到src上
+ * 
  * 待添加的功能
  *  智能的set
+ * 
  *  
  */
