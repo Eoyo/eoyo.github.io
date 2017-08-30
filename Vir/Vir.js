@@ -2199,6 +2199,9 @@ window.onerror = function (mes) {
  *  在某个dom处插入Vir片段;( Vir 可以多参数 )
  *  iframe 默认解析到src上
  * 
+ * 2017 8 30 
+ *  use svg!
+ * 
  * 待添加的功能
  *  智能的set
  * 

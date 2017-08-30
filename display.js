@@ -128,12 +128,3 @@
     //test
     console.log(flu.getLink())
 })();
-
-var x = `
-    \`table
-        goods   |nide   
-        fawe    |fwaf
-        awef    |faw
-    \`code
-`
-console.log(x)
