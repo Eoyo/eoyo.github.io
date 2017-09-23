@@ -1,5 +1,4 @@
 @charset "utf-8";
-@import "image.sass";
 @import "tool/color";
 @import "tool/layout";
 @import "tool/shape";
@@ -185,4 +184,9 @@
 }
 @mixin Grid($arr){
     @include Grid-wh($arr,(1,1,1) ,(1,1,1) );
+}
+
+@mixin Square($size){
+    width: $size;
+    height: $size;
 }
