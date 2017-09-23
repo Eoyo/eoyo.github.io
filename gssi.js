@@ -1,4 +1,9 @@
+//icon ,html,picture..etc data:
+var icons = {
+    search: `<svg viewBox="0 0 16 16" class="Icon Icon--search" width="16" height="16" aria-hidden="true" style="height: 16px; width: 16px;"><title></title><g><path d="M12.054 10.864c.887-1.14 1.42-2.57 1.42-4.127C13.474 3.017 10.457 0 6.737 0S0 3.016 0 6.737c0 3.72 3.016 6.737 6.737 6.737 1.556 0 2.985-.533 4.127-1.42l3.103 3.104c.765.46 1.705-.37 1.19-1.19l-3.103-3.104zm-5.317.925c-2.786 0-5.053-2.267-5.053-5.053S3.95 1.684 6.737 1.684 11.79 3.95 11.79 6.737 9.522 11.79 6.736 11.79z"></path></g></svg>`
+}
 
+//old style data
 var mainProjs = [
     {
         title: "Booking System"
@@ -113,7 +118,7 @@ class ShadowRooter {
         //shadow-root; //2017 9 23 only chrome can !;
         if (div.createShadowRoot) {
             this.shaDoc = div.createShadowRoot();
-        }else{
+        } else {
             //用 iframe 代替 shadowRoot; //失败!!!
             var im = document.createElement("iframe");
             this.shaDoc = im;
@@ -133,28 +138,31 @@ class ShadowRooter {
                 }
                 break;
         }
-        str += '<div id="content"></div>'
         this.innerHTML += str;
     }
     addDiv(div) {
-        if(this.shaDoc.tagName === "IFRAME"){
+        if (this.shaDoc.tagName === "IFRAME") {
             this.shaDoc.src = "data:text/html," + this.innerHTML;
-            this.shaDoc.onload = function (){
+            this.shaDoc.onload = function () {
                 console.log(this);
             }
-        }else{
-            this.shaDoc.innerHTML = this.innerHTML;
+        } else {
+            if (!div) {
+                console.log("Can't add this one!:" + div);
+                return;
+            }
+            this.shaDoc.innerHTML = this.innerHTML + '<div id="content"></div>';
             this.shaDoc.getElementById("content").appendChild(div);
         }
     }
-    static shroot(){
-        if(ShadowRooter._is_shroot !== undefined){
+    static shroot() {
+        if (ShadowRooter._is_shroot !== undefined) {
             return ShadowRooter._is_shroot;
         }
         var div = document.createElement("div");
-        if(div.createShadowRoot){
+        if (div.createShadowRoot) {
             ShadowRooter._is_shroot = true;
-        }else{
+        } else {
             ShadowRooter._is_shroot = false;
         }
         return ShadowRooter._is_shroot;
@@ -237,7 +245,9 @@ var virLoader = {
             return null;
         }
     }
-    , open(href) {
+
+    //callback when js is loaded;
+    , open(href,cb) {
         if (this.map.has(href)) {
             return;
         }
@@ -247,7 +257,7 @@ var virLoader = {
             return bkDiv;
         }
         var bkLoad = Vir(bkDiv, {
-            "div ::backgroundDiv": this.load(href)
+            "div ::backgroundDiv": this.load(href,cb)
         })
         // bkDiv.removeChild(bkLoad.backgroundDiv)
         this.map.set(href, bkLoad.backgroundDiv);
@@ -264,16 +274,37 @@ var menuToContent = {
                 return;
             }
 
-            if(ShadowRooter.shroot()){
+            //支持shadown Root ?
+            if (ShadowRooter.shroot()) {
                 var srcDiv = document.createElement("div");
                 var shaDoc = new ShadowRooter(srcDiv);
-                //open the online;
-                virLoader.open(e.href);
-                var div = virLoader.getDiv(e.href);
-                
-                shaDoc.addStyle(e.css);
-                shaDoc.addDiv(div);
-            }else{
+
+                //open  online; if there is one href;
+                if (e.href) {
+                    virLoader.open(e.href);
+                    var div = virLoader.getDiv(e.href , function (){
+                        Animate.collect(3,e.href);
+                    });
+                }
+
+                //check if it is nothing;
+                if (div) {
+                    shaDoc.addStyle(e.css);
+                    shaDoc.addDiv(div);
+                } else {
+                    var nothing = document.createElement("div");
+                    Vir(nothing, {
+                        h2: {
+                            $: "There is Nothing!"
+                        }
+                        , style: {
+                            padding: "20px"
+                            , color: "#eee"
+                        }
+                    })
+                    shaDoc.addDiv(nothing);
+                }
+            } else {
                 srcDiv = document.createElement("div");
                 var iframe = document.createElement("iframe");
                 // var str = "";
@@ -294,8 +325,8 @@ var menuToContent = {
                 srcDiv.appendChild(iframe);
             }
 
-
-            content.add({ href:e.href, div: srcDiv });
+            //add to content;
+            content.add({ href: e.href, div: srcDiv });
             content.show(e.href);
         })
     }
@@ -387,12 +418,12 @@ var mainDom = {
         , ".wrap": {
             ".name": "Welcome to Eoyo's github page!"
             , ".search": {
-                "input": {
+                "span>input": {
                     args: {
                         value: "123"
                     }
                 }
-                , "button": "搜索"
+                , "span>button": "搜索"
             }
         }
     }

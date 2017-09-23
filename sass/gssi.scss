@@ -55,7 +55,7 @@ $lightShadow:1px 1px 3px -1px rgba(0,0,0,0.4);
     width: calc(100% - #{$menuWidth});
     top:0;left:0;
     margin: $headHeight $rightPadding $footHeight $menuWidth;
-    padding: 10px;
+    padding: 10px 10px 10px 0px;
     // padding-right: $menuWidth;
     z-index: -1;
     overflow: auto;
@@ -197,15 +197,25 @@ $lightShadow:1px 1px 3px -1px rgba(0,0,0,0.4);
 }
 
 .search{
+    vertical-align: top;
+    height: 34px;
+    // position: relative;
+    span{
+        // position: absolute;
+        height: 100%;
+        display: inline-block;
+        float: left;
+    }
     input{
-        height: 33px;
+        height:100%;
         // padding: 10px;
         font-size: 20px;
         margin: 0px 10px;
     }
     button{
-        height: 33px;
-        padding: 10px;
+        height: 100%;
+        font-size: 20px;
+        padding: 0 10px;
     }
 }
 

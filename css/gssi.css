@@ -55,7 +55,7 @@ a.wrapA {
   top: 0;
   left: 0;
   margin: 50px 50px 35px 200px;
-  padding: 10px;
+  padding: 10px 10px 10px 0px;
   z-index: -1;
   overflow: auto; }
   .content .section {
@@ -162,13 +162,21 @@ a.wrapA {
     opacity: 1;
     transform: scale(0.9); }
 
-.search input {
-  height: 33px;
-  font-size: 20px;
-  margin: 0px 10px; }
-.search button {
-  height: 33px;
-  padding: 10px; }
+.search {
+  vertical-align: top;
+  height: 34px; }
+  .search span {
+    height: 100%;
+    display: inline-block;
+    float: left; }
+  .search input {
+    height: 100%;
+    font-size: 20px;
+    margin: 0px 10px; }
+  .search button {
+    height: 100%;
+    font-size: 20px;
+    padding: 0 10px; }
 
 /*
 translate scale ,is influnce by order!

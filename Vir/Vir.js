@@ -2727,10 +2727,46 @@
 
 
     //try to rewrite this function ;
+    // it is ok to rewrtie this One !!
     var animation = globle.requestAnimationFrame;
+    var stop = false;
     globle.requestAnimationFrame = function (func){
+        if(stop){
+            Animate.store(func);
+            return;
+        }
         animation(func);
     }
+    var Animate = {
+        funcStore :[]
+        , store (func){
+            this.funcStore.push(func);
+        }
+
+        //public
+        ,stop(){
+            //清空
+            this.funcStore = []
+            stop = true;
+        }
+        ,restart(){
+            stop = false;
+            for(var x of this.funcStore){
+                globle.requestAnimationFrame(x);
+            }
+            this.funcStore = [];
+        }
+        ,nextTick(){
+            if(stop == false){
+                return;
+            }
+            Animate.restart();
+            animation(function(){
+                Animate.stop();
+            })
+        }
+    }
+    globle.Animate = Animate;
 }(this));
 
 
