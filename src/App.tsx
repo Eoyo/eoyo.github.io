@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import style from "./App.module.less";
 import { FiveGame } from "./FiveGame";
+import { GreetingCard } from "./GreetingCard";
 
 function LinkTile(props: { href: string; children: React.ReactNode }) {
   return (
@@ -23,6 +24,7 @@ function Doc() {
   return (
     <div className={style.doc}>
       <LinkTile href="#fivegame">黑白五子棋</LinkTile>
+      <LinkTile href="#greetingcard">贺卡</LinkTile>
       <img src="" />
     </div>
   );
@@ -46,6 +48,7 @@ function App() {
     <>
       {hash === "" && <Doc />}
       {hash === "#fivegame" && <FiveGame />}
+      {hash === "#greetingcard" && <GreetingCard />}
     </>
   );
 }
