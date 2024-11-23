@@ -1,0 +1,73 @@
+.doc {
+  width: 60%;
+  margin: 0 auto;
+}
+.link-title-wrapper {
+  font-size: 40px;
+  font-weight: bold;
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+.link-title {
+  @time: 0.3s;
+  cursor: pointer;
+  color: black;
+  margin: 20px 30px;
+  transition: all @time;
+  overflow: hidden;
+  position: relative;
+  display: inline-block;
+  line-height: 60px;
+  height: 68px;
+  &-bg {
+    display: inline-block;
+    position: absolute;
+    z-index: -1;
+    transition: all @time;
+    background-color: white;
+    width: 100%;
+    height: 100%;
+    left: -100%;
+  }
+  &-static {
+    transition: all @time;
+    display: inline-block;
+    overflow: hidden;
+    padding: 0 8px;
+    margin: 4px;
+    background-color: white;
+  }
+  &-moving {
+    color: black;
+    background-color: white;
+    transition: all @time;
+    position: absolute;
+    overflow: hidden;
+    top: 0px;
+    height: 100%;
+    width: 50%;
+    left: 100%;
+    &-inner {
+      display: inline-block;
+      width: 1000px;
+      transition: all @time;
+      position: relative;
+      padding: 4px 12px;
+      left: -200%;
+    }
+  }
+  &:hover {
+    .link-title-bg {
+      left: 0%;
+      background-color: black;
+    }
+    .link-title-moving {
+      left: 0%;
+      background-color: black;
+      color: white;
+      &-inner {
+        left: 0%;
+      }
+    }
+  }
+}
