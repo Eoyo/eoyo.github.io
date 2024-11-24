@@ -43,18 +43,36 @@ export function GreetingCard() {
       cakeLaye1,
       candle,
     ];
+    let lastTime = Date.now();
     let animationId = requestAnimationFrame(function doAnimation() {
       ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
       startsNet.scalingAt(ctx.canvas.width / 2, ctx.canvas.height / 2);
       goldenBg.rotate(0.001);
-      candle.addT(16);
-      card.addT(16);
-      cakeLaye1.addT(16);
-      cakeLaye2.addT(16);
-      cakeLaye3.addT(16);
-      cakeLaye4.addT(16);
+      const nowTime = Date.now();
+      const diffTime = nowTime - lastTime;
+      lastTime = nowTime;
+      if (stateRef.current?.open) {
+        candle.addT(diffTime);
+        card.addT(diffTime);
+        cakeLaye1.addT(diffTime);
+        cakeLaye2.addT(diffTime);
+        cakeLaye3.addT(diffTime);
+        cakeLaye4.addT(diffTime);
+      } else {
+        candle.setT(0);
+        card.setT(0);
+        cakeLaye1.setT(0);
+        cakeLaye2.setT(0);
+        cakeLaye3.setT(0);
+        cakeLaye4.setT(0);
+      }
       drawable.current.forEach((drawable) => {
         drawable.draw(ctx);
+      });
+      drawable.current.forEach((drawable) => {
+        if (drawable.drawAfter) {
+          drawable.drawAfter(ctx);
+        }
       });
       animationId = requestAnimationFrame(doAnimation);
     });
@@ -78,16 +96,44 @@ export function GreetingCard() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const [selected, setSelected] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [lighting, setLighting] = useState(false);
+  const stateRef = useRef<{
+    open: boolean;
+    lighting: boolean;
+    hasOpened: boolean;
+  }>({ open, lighting, hasOpened: false });
+  stateRef.current.open = open;
+  stateRef.current.lighting = lighting;
   useEffect(() => {
-    drawable.current.forEach((drawable) => {
-      drawable.toggleLight(selected);
+    if (open) {
+      const id = setTimeout(() => {
+        setLighting(true);
+        stateRef.current.hasOpened = true;
+      }, 3000);
+      return () => {
+        clearTimeout(id);
+      };
+    } else {
+      setLighting(false);
+    }
+  }, [open]);
+  useEffect(() => {
+    drawable.current.forEach((d) => {
+      d.toggleLight(lighting);
     });
-  }, [selected]);
+  }, [lighting]);
   return (
     <canvas
-      className={`greeting-card ${selected ? "selected" : ""}`}
-      onClick={() => setSelected(!selected)}
+      className={`greeting-card`}
+      onClick={() => {
+        if (!open && !lighting) {
+          setOpen(true);
+        }
+        if (open && stateRef.current.hasOpened) {
+          setLighting(!lighting);
+        }
+      }}
       ref={ref}
     ></canvas>
   );

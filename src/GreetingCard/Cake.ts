@@ -105,11 +105,11 @@ export class CakeLayer implements Drawable {
   private light: boolean = false;
   private t = 0;
   private k = new ValueKeyframe(0, 1, 3000);
+  setT(t: number) {
+    this.t = t;
+  }
   addT(dt: number) {
     this.t += dt;
-    if (this.t > 3000) {
-      this.t = 0;
-    }
   }
   toggleLight(light: boolean) {
     this.light = light;

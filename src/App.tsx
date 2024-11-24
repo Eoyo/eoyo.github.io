@@ -30,7 +30,7 @@ function Doc() {
   );
 }
 
-function App() {
+export function App() {
   const [hash, setHash] = useState(window.location.hash);
 
   React.useEffect(() => {
@@ -53,4 +53,8 @@ function App() {
   );
 }
 
-export default App;
+function AppGreetingCard() {
+  return <GreetingCard />;
+}
+
+export default AppGreetingCard;

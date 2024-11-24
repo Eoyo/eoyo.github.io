@@ -99,7 +99,11 @@ export class Candle implements Drawable {
   private offsetY: number = -200;
   private light: boolean = false;
   constructor() {
+    this.generateFire();
+  }
+  generateFire() {
     const count = 5;
+    this.fires = [];
     for (let i = 0; i < count; i++) {
       const fire = new CandleFire();
       fire.setT((i * fire.getDuration()) / count);
@@ -109,19 +113,24 @@ export class Candle implements Drawable {
   }
   toggleLight(light: boolean) {
     this.light = light;
+    this.generateFire();
     this.fires.forEach((fire) => {
       fire.toggleLight(light);
     });
+    this.setPosition(this.x, this.y);
+  }
+  private t: number = 0;
+  private k = new ValueKeyframe(0, 1, 3000);
+  setT(t: number) {
+    this.t = t;
+    this.addT(0);
   }
   addT(t: number) {
+    this.t += t;
     this.fires.forEach((fire) => {
       fire.addT(t);
     });
     this.fires.sort((a, b) => a.getT() - b.getT());
-    this.fires[0].setShowShadow(true);
-    this.fires.slice(1).forEach((fire) => {
-      fire.setShowShadow(false);
-    });
   }
   setPosition(x: number, y: number): void {
     this.x = x;
@@ -138,7 +147,10 @@ export class Candle implements Drawable {
   draw(ctx: CanvasRenderingContext2D): void {
     // 绘制蜡烛主体
     ctx.save();
-    ctx.translate(this.x, this.y + this.offsetY + this.height / 2 + 40);
+    ctx.translate(
+      this.x,
+      this.y + (this.offsetY + this.height / 2 + 40) * this.k.get(this.t)
+    );
     ctx.shadowColor = "rgba(248, 233, 209)";
     // 底部椭圆
     ctx.beginPath();
