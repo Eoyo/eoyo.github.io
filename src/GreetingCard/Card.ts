@@ -12,7 +12,6 @@ export class Card implements Drawable {
   private light: boolean = false;
   private skew: number = 0.5;
   private skewWidth: number = 1.5;
-  private skewHeight: number = 0.6;
   private duration: number = 3000;
   private widthChange = new ValueKeyframe(
     (this.width / 2) * this.skewWidth,

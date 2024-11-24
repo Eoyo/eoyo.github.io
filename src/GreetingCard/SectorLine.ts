@@ -8,7 +8,7 @@ export class SectorLine implements Drawable {
   private r1: number;
   private r2: number;
   color: string | CanvasGradient | CanvasPattern = "";
-  private light: boolean = false;
+  light: boolean = false;
   toggleLight(light: boolean) {
     this.light = light;
   }

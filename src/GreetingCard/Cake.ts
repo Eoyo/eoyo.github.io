@@ -53,7 +53,7 @@ export class CakeBee implements Drawable {
   private skew: number = 0.5;
   private radius: number = 3;
   private color: string;
-  private light: boolean = false;
+  light: boolean = false;
   toggleLight(light: boolean) {
     this.light = light;
   }
@@ -95,7 +95,6 @@ export class CakeLayer implements Drawable {
   private skew: number = 0.5;
   private color: string = "rgb(255, 215, 85)";
   private colorDark: string = "rgb(245, 195, 45)";
-  private colorNolight: string = "rgb(235, 180, 25)";
   private feet: CakeFoot[] = [];
   private bees: CakeBee[] = [];
   private offsetX: number = 0;
