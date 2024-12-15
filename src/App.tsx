@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import style from "./App.module.less";
 import { FiveGame } from "./FiveGame";
 import { GreetingCard } from "./GreetingCard";
+import { Geo } from "./Geo";
 
 function LinkTile(props: { href: string; children: React.ReactNode }) {
   return (
@@ -25,6 +26,7 @@ function Doc() {
     <div className={style.doc}>
       <LinkTile href="#fivegame">黑白五子棋</LinkTile>
       <LinkTile href="#greetingcard">贺卡</LinkTile>
+      <LinkTile href="#geo">几何</LinkTile>
       <img src="" />
     </div>
   );
@@ -49,12 +51,9 @@ export function App() {
       {hash === "" && <Doc />}
       {hash === "#fivegame" && <FiveGame />}
       {hash === "#greetingcard" && <GreetingCard />}
+      {hash === "#geo" && <Geo />}
     </>
   );
 }
 
-function AppGreetingCard() {
-  return <GreetingCard />;
-}
-
-export default AppGreetingCard;
+export default App;
